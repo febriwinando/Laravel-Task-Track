@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SeoDash Free Bootstrap Admin Template by Adminmart</title>
   <link rel="shortcut icon" type="image/png" href="{{ asset('storage/assets/images/logos/seodashlogo.png') }}" />
-  <link rel="stylesheet" href="../../node_modules/simplebar/dist/simplebar.min.css">
+  <link rel="stylesheet" href="{{ asset('storage/assets/css/simplebar.css') }}"">
   <link rel="stylesheet" href="{{ asset('storage/assets/css/styles.min.css') }}" />
 </head>
 
@@ -36,7 +36,7 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="./index.html" aria-expanded="false">
                             <span>
-                            <iconify-icon icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
+                                <img src="{{ asset('storage/assets/icon/addpeople.svg') }}" width="30" alt="" />
                             </span>
                             <span class="hide-menu">Add Employee</span>
                         </a>
@@ -44,7 +44,7 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="./index.html" aria-expanded="false">
                             <span>
-                            <iconify-icon icon="solar:home-smile-bold-duotone" class="fs-6"></iconify-icon>
+                                <img src="{{ asset('storage/assets/icon/peoples.svg') }}" width="30" alt="" />
                             </span>
                             <span class="hide-menu">List Employees</span>
                         </a>
@@ -57,7 +57,7 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
                             <span>
-                            <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6"></iconify-icon>
+                                <img src="{{ asset('storage/assets/icon/addlocation.svg') }}" width="30" alt="" />
                             </span>
                             <span class="hide-menu">Add Locations</span>
                         </a>
@@ -65,7 +65,7 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="./ui-buttons.html" aria-expanded="false">
                             <span>
-                            <iconify-icon icon="solar:layers-minimalistic-bold-duotone" class="fs-6"></iconify-icon>
+                                <img src="{{ asset('storage/assets/icon/location.svg') }}" width="30" alt="" />
                             </span>
                             <span class="hide-menu">List Locations</span>
                         </a>
@@ -77,7 +77,7 @@
                     <li class="sidebar-item">
                     <a class="sidebar-link" href="./authentication-login.html" aria-expanded="false">
                         <span>
-                        <iconify-icon icon="solar:login-3-bold-duotone" class="fs-6"></iconify-icon>
+                                <img src="{{ asset('storage/assets/icon/addelement.svg') }}" width="30" alt="" />
                         </span>
                         <span class="hide-menu">Add Task</span>
                     </a>
@@ -85,7 +85,7 @@
                     <li class="sidebar-item">
                     <a class="sidebar-link" href="./authentication-register.html" aria-expanded="false">
                         <span>
-                        <iconify-icon icon="solar:user-plus-rounded-bold-duotone" class="fs-6"></iconify-icon>
+                                <img src="{{ asset('storage/assets/icon/element.svg') }}" width="30" alt="" />
                         </span>
                         <span class="hide-menu">List Tasks</span>
                     </a>
@@ -97,7 +97,7 @@
                     <li class="sidebar-item">
                     <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
                         <span>
-                        <iconify-icon icon="solar:sticker-smile-circle-2-bold-duotone" class="fs-6"></iconify-icon>
+                                <img src="{{ asset('storage/assets/icon/editcalendar.svg') }}" width="30" alt="" />
                         </span>
                         <span class="hide-menu">Manage Schedules</span>
                     </a>
@@ -105,7 +105,7 @@
                     <li class="sidebar-item">
                     <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
                         <span>
-                        <iconify-icon icon="solar:planet-3-bold-duotone" class="fs-6"></iconify-icon>
+                                <img src="{{ asset('storage/assets/icon/calendar.svg') }}" width="30" alt="" />
                         </span>
                         <span class="hide-menu">List Schedules</span>
                     </a>
@@ -125,7 +125,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item d-block d-xl-none">
                     <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
-                        <i class="ti ti-menu-2"></i>
+                        <img src="{{ asset('storage/assets/icon/menu.svg') }}" width="30" alt="" />
                     </a>
                     </li>
                     <li class="nav-item">

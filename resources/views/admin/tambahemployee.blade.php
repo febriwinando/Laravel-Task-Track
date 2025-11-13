@@ -5,7 +5,7 @@
             @section('content')
                         <div class="card">
                             <h5 class="card-title fw-semibold card-header">
-                                {{ $pegawai->exists ? 'Edit Employee' : 'Add New Employee' }}
+                                {{ isset($pegawai) ? 'Edit Employee' : 'Add New Employee' }}
                             </h5>
                             <div class="card-body">
                                 {{-- ALERT SUKSES --}}
@@ -16,11 +16,11 @@
                                     </div>
                                 @endif
                                 <form 
-                                    action="{{ $pegawai->exists ? route('pegawai.update', $pegawai->id) : route('pegawai.store') }}" 
+                                    action="{{ isset($pegawai) ? route('pegawai.update', $pegawai->id) : route('pegawai.store') }}" 
                                     method="POST" 
                                     enctype="multipart/form-data">
                                     @csrf
-                                    @if ($pegawai->exists)
+                                    @if (isset($pegawai))
                                         @method('PUT')
                                     @endif
 
@@ -31,7 +31,7 @@
                                             <input type="text"
                                                 class="rounded-pill form-control @error('name') is-invalid @enderror"
                                                 id="name" name="name"
-                                                value="{{ old('name', $pegawai->name) }}"
+                                                value="{{ old('name', $pegawai->name ?? '') }}"
                                                 required>
                                             @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
@@ -42,7 +42,7 @@
                                             <input type="text"
                                                 class="rounded-pill form-control @error('nik') is-invalid @enderror"
                                                 id="nik" name="nik"
-                                                value="{{ old('nik', $pegawai->nik) }}"
+                                                value="{{ old('nik', $pegawai->nik ?? '') }}"
                                                 required>
                                             @error('nik') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
@@ -53,7 +53,7 @@
                                             <input type="text"
                                                 class="rounded-pill form-control @error('employee_id') is-invalid @enderror"
                                                 id="employee_id" name="employee_id"
-                                                value="{{ old('employee_id', $pegawai->employee_id) }}"
+                                                value="{{ old('employee_id', $pegawai->employee_id ?? '') }}"
                                                 required>
                                             @error('employee_id') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
@@ -64,7 +64,7 @@
                                             <input type="email"
                                                 class="rounded-pill form-control @error('email') is-invalid @enderror"
                                                 id="email" name="email"
-                                                value="{{ old('email', $pegawai->email) }}"
+                                                value="{{ old('email', $pegawai->email ?? '') }}"
                                                 required>
                                             @error('email') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
@@ -75,7 +75,7 @@
                                             <input type="tel"
                                                 class="rounded-pill form-control @error('nomor_wa') is-invalid @enderror"
                                                 id="nomor_wa" name="nomor_wa"
-                                                value="{{ old('nomor_wa', $pegawai->nomor_wa) }}"
+                                                value="{{ old('nomor_wa', $pegawai->nomor_wa ?? '') }}"
                                                 required>
                                             @error('nomor_wa') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
@@ -84,8 +84,8 @@
                                         <div class="col-sm-6 mb-3">
                                             <label for="level" class="form-label">User Role</label>
                                             <select name="level" class="form-control rounded-pill @error('level') is-invalid @enderror">
-                                                <option value="officer" {{ old('level', $pegawai->level) == 'officer' ? 'selected' : '' }}>Officer</option>
-                                                <option value="verifier" {{ old('level', $pegawai->level) == 'verifier' ? 'selected' : '' }}>Verifier</option>
+                                                <option value="officer" {{ old('level', $pegawai->level ?? '') == 'officer' ? 'selected' : '' }}>Officer</option>
+                                                <option value="verifier" {{ old('level', $pegawai->level ?? '') == 'verifier' ? 'selected' : '' }}>Verifier</option>
                                             </select>
                                             @error('level') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
@@ -94,8 +94,8 @@
                                         <div class="col-sm-6 mb-3">
                                             <label for="status" class="form-label">Status</label>
                                             <select name="status" class="form-control rounded-pill @error('status') is-invalid @enderror">
-                                                <option value="active" {{ old('status', $pegawai->status) == 'active' ? 'selected' : '' }}>Active</option>
-                                                <option value="inactive" {{ old('status', $pegawai->status) == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                                <option value="active" {{ old('status', $pegawai->status ?? '') == 'active' ? 'selected' : '' }}>Active</option>
+                                                <option value="inactive" {{ old('status', $pegawai->status ?? '') == 'inactive' ? 'selected' : '' }}>Inactive</option>
                                             </select>
                                             @error('status') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
@@ -106,8 +106,8 @@
                                             <input type="password"
                                                 class="rounded-pill form-control @error('password') is-invalid @enderror"
                                                 id="password" name="password"
-                                                {{ !$pegawai->exists ? 'required' : '' }}
-                                                placeholder="{{ $pegawai->exists ? 'Kosongkan jika tidak diubah' : 'Minimal 8 karakter' }}">
+                                                {{ !isset($pegawai) ? 'required' : '' }}
+                                                placeholder="{{ isset($pegawai) ? 'Kosongkan jika tidak diubah' : 'Minimal 8 karakter' }}">
                                             @error('password') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
 
@@ -123,7 +123,7 @@
                                             <input type="file" class="rounded-pill form-control @error('foto') is-invalid @enderror" name="foto" accept="image/*" onchange="previewImage(event)">
                                             @error('foto') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                             <div class="mt-3 text-center">
-                                                @if ($pegawai->foto)
+                                                @if (isset($pegawai->foto))
                                                     <img id="preview" src="{{ asset('storage/' . $pegawai->foto) }}" alt="Foto" class="img-thumbnail" style="max-width:200px;border-radius:10px;">
                                                 @else
                                                     <img id="preview" src="#" class="img-thumbnail d-none" style="max-width:200px;border-radius:10px;">
@@ -136,7 +136,7 @@
                                     <div class="d-flex justify-content-end mt-3">
                                         <a href="{{ route('pegawai.index') }}" class="btn btn-warning me-2">Cancel</a>
                                         <button type="submit" class="btn btn-primary">
-                                            {{ $pegawai->exists ? 'Update' : 'Add' }}
+                                            {{ isset($pegawai) ? 'Update' : 'Add' }}
                                         </button>
                                     </div>
                                 </form>

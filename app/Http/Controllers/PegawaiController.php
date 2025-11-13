@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pegawai;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class PegawaiController extends Controller
 {
@@ -64,24 +66,56 @@ class PegawaiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Pegawai $pegawai)
     {
-        //
+        return view('admin.tambahemployee', compact('pegawai'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Pegawai $pegawai)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'nik' => 'required|string|max:20|unique:pegawais,nik,' . $pegawai->id,
+            'employee_id' => 'required|string|max:20|unique:pegawais,employee_id,' . $pegawai->id,
+            'email' => 'required|email|unique:pegawais,email,' . $pegawai->id,
+            'nomor_wa' => 'required|string|max:20',
+            'level' => 'required|string',
+            'status' => 'required|string',
+            'password' => 'nullable|min:8|confirmed',
+            'foto' => 'nullable|image|max:2048',
+        ]);
+
+        if ($request->hasFile('foto')) {
+            if ($pegawai->foto) {
+                Storage::disk('public')->delete($pegawai->foto);
+            }
+            $validated['foto'] = $request->file('foto')->store('pegawai', 'public');
+        }
+
+        if ($request->filled('password')) {
+            $validated['password'] = Hash::make($validated['password']);
+        } else {
+            unset($validated['password']);
+        }
+
+        $pegawai->update($validated);
+
+        return redirect()->route('pegawai.index')->with('success', 'Employee updated successfully!');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Pegawai $pegawai)
     {
-        //
+        if ($pegawai->foto) {
+            Storage::disk('public')->delete($pegawai->foto);
+        }
+        $pegawai->delete();
+
+        return redirect()->route('pegawai.index')->with('success', 'Employee deleted successfully!');
     }
 }

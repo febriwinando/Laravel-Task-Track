@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\KegiatanController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\PegawaiController;
+
 
 
 
@@ -13,5 +15,10 @@ Route::get('/', [LoginController::class, 'login'])->name('login');
 
 Route::get('/kegiatan', [KegiatanController::class, 'kegiatan'])->name('kegiatan');
 Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal.index');
+Route::get('/jadwal', [JadwalController::class, 'index'])->name('jadwal.index');
+
+
+//Pegawai
+Route::resource('pegawai', PegawaiController::class);
 
 

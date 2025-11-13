@@ -1,0 +1,18 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
+class Pegawai extends Model
+{
+     use HasFactory, Notifiable;
+
+    protected $fillable = ['name', 'nik', 'employee_id', 'email', 'nomor_wa', 'level', 'status', 'password', 'foto'];
+
+}

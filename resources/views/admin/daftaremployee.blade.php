@@ -12,8 +12,8 @@
 
     <div class="card">
         <div class="card-title fw-semibold card-header d-flex justify-content-between align-items-center mb-3">
-            <h3>Daftar Pegawai</h3>
-            <a href="{{ route('pegawai.create') }}" class="btn btn-primary">+ Tambah Pegawai</a>
+            <h3>List Employees</h3>
+            <a href="{{ route('pegawai.create') }}" class="btn btn-primary">+ Add new Employee</a>
         </div>
         <div class="card-body">
             <div class="table-responsive rounded">
@@ -21,14 +21,14 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
-                            <th>NIK</th>
-                            <th>ID Pegawai</th>
+                            <th>Name</th>
+                            <th>ID Card</th>
+                            <th>Employee ID</th>
                             <th>Email</th>
-                            <th>Nomor WA</th>
+                            <th>Phone Number</th>
                             <th>Level</th>
-                            <th>Foto</th>
-                            <th>Aksi</th>
+                            <th>Photo</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,7 +50,7 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                    <form action="{{ route('pegawai.destroy', $pegawai->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Yakin ingin hapus?')">
+                                    <form action="{{ route('pegawai.destroy', $pegawai->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this?')">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-sm btn-danger">Hapus</button>

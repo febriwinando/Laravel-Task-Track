@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Kegiatan;
+
 
 class KegiatanController extends Controller
 {
     public function kegiatan(){
+
         return view('admin.kegiatan');
     }
     /**
@@ -14,7 +17,8 @@ class KegiatanController extends Controller
      */
     public function index()
     {
-        //
+        $kegiatans = Kegiatan::all();
+        return view('admin.kegiatan', compact('kegiatans'));
     }
 
     /**
@@ -22,7 +26,7 @@ class KegiatanController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.tambahkegiatan');
     }
 
     /**

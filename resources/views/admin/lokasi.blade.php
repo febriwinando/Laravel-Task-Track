@@ -13,7 +13,7 @@
     <div class="card">
         <div class="card-title fw-semibold card-header d-flex justify-content-between align-items-center mb-3">
             <h3>List Location</h3>
-            <a href="{{ route('kegiatan.create') }}" class="btn btn-primary">+ Add New Location</a>
+            <a href="{{ route('lokasi.create') }}" class="btn btn-primary">+ Add New Location</a>
         </div>
         <div class="card-body">
             <div class="table-responsive rounded">
@@ -29,16 +29,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($kegiatans as $kegiatan)
+                        @forelse ($lokasis as $lokasi)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $kegiatan->building }}</td>
-                                <td>{{ $kegiatan->floor }}</td>
-                                <td>{{ $kegiatan->ssid }}</td>
-                                <td>{{ $kegiatan->ip_wifi }}</td>
+                                <td>{{ $lokasi->building }}</td>
+                                <td>{{ $lokasi->floor }}</td>
+                                <td>{{ $lokasi->ssid }}</td>
+                                <td>{{ $lokasi->ip_wifi }}</td>
                                 <td>
-                                    <a href="{{ route('kegiatan.edit', $kegiatan->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                    <form action="{{ route('kegiatan.destroy', $kegiatan->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this?')">
+                                    <a href="{{ route('lokasi.edit', $lokasi->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                    <form action="{{ route('lokasi.destroy', $lokasi->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this?')">
                                         @csrf
                                         @method('DELETE')
                                         <button class="btn btn-sm btn-danger">Hapus</button>

@@ -71,7 +71,7 @@
 
                                         {{-- WHATSAPP --}}
                                         <div class="col-sm-6 mb-3">
-                                            <label for="nomor_wa" class="form-label">Phone / WhatsApp</label>
+                                            <label for="nomor_wa" class="form-label">Phone Number / WhatsApp Number</label>
                                             <input type="tel"
                                                 class="rounded-pill form-control @error('nomor_wa') is-invalid @enderror"
                                                 id="nomor_wa" name="nomor_wa"

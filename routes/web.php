@@ -31,17 +31,25 @@ Route::resource('kegiatan', KegiatanController::class);
 
 
 // Jadwal
-Route::get('/jadwal/kegiatan/{tanggal}', [JadwalController::class, 'getKegiatan']);
-// Route::post('/jadwal/kegiatan', [JadwalController::class, 'storeKegiatan']);
+// Modal data
+Route::get('/jadwal/modal-data/{tanggal}/{pegawai_id}', [JadwalController::class, 'modalData']);
 
-Route::get('/jadwal/events/{pegawai_id}', [JadwalController::class, 'getEvents']);
-Route::get('/jadwal/kegiatan/{tanggal}/{pegawai_id}', [JadwalController::class, 'getKegiatanByDate']);
-Route::post('/jadwal/kegiatan', [JadwalController::class, 'saveSchedule']);
-
-Route::get('/jadwal/day', [JadwalController::class, 'getDayActivities']);
-
+// Menyimpan schedule (bukan kegiatan-list)
+Route::post('/jadwal/save', [JadwalController::class, 'save']);
+Route::delete('/jadwal/delete/{id}', [JadwalController::class, 'delete']);
 
 Route::resource('jadwal', JadwalController::class);
+
+// Route::get('/jadwal/kegiatan/{tanggal}', [JadwalController::class, 'getKegiatan']);
+// Route::post('/jadwal/kegiatan', [JadwalController::class, 'storeKegiatan']);
+
+// Route::get('/jadwal/events/{pegawai_id}', [JadwalController::class, 'getEvents']);
+// Route::get('/jadwal/kegiatan/{tanggal}/{pegawai_id}', [JadwalController::class, 'getKegiatanByDate']);
+// Route::post('/jadwal/kegiatan', [JadwalController::class, 'saveSchedule']);
+// Route::delete('/jadwal/delete/{id}',[JadwalController::class, 'delete']);
+// Route::get('/jadwal/day', [JadwalController::class, 'getDayActivities']);
+
+// Route::resource('jadwal', JadwalController::class);
 
 
 

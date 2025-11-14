@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pegawai;
 use App\Models\Kegiatan;
+use App\Models\Lokasi;
+
 use App\Models\Schedule;
 
 
@@ -65,32 +67,30 @@ class JadwalController extends Controller
     // =======================
     // SAVE SCHEDULE
     // =======================
-    public function saveSchedule(Request $req)
+    public function save(Request $req)
     {
         $req->validate([
-            'tanggal'      => 'required|date',
-            'pegawai_id'   => 'required',
-            'kegiatan_ids' => 'array',
+            'tanggal'     => 'required|date',
+            'pegawai_id'  => 'required',
+            'kegiatan_id' => 'required',
+            'lokasi_id'   => 'required',
         ]);
 
-        // hapus data lama untuk tanggal + pegawai ini
-        Schedule::where('tanggal', $req->tanggal)
+        Schedule::create([
+            'tanggal'     => $req->tanggal,
+            'pegawai_id'  => $req->pegawai_id,
+            'kegiatan_id' => $req->kegiatan_id,
+            'lokasi_id'   => $req->lokasi_id,
+        ]);
+
+        $schedules = Schedule::with(['kegiatan', 'lokasi'])
+            ->where('tanggal', $req->tanggal)
             ->where('pegawai_id', $req->pegawai_id)
-            ->delete();
+            ->get();
 
-        // simpan ulang
-        if ($req->kegiatan_ids) {
-            foreach ($req->kegiatan_ids as $kid) {
-                Schedule::create([
-                    'tanggal'      => $req->tanggal,
-                    'pegawai_id'   => $req->pegawai_id,
-                    'kegiatan_id'  => $kid,
-                ]);
-            }
-        }
-
-        return response()->json(['success' => true]);
+        return response()->json(['schedules' => $schedules]);
     }
+
 
     // =======================
     // FULLCALENDAR EVENTS
@@ -126,10 +126,27 @@ class JadwalController extends Controller
     }
 
 
+    public function modalData($tanggal, $pegawai_id)
+    {
+        return response()->json([
+            'kegiatan' => Kegiatan::where('status', 1)->get(),
+            'lokasi'   => Lokasi::where('status', 1)->get(),
+            'schedules' => Schedule::with(['kegiatan', 'lokasi'])
+                ->where('tanggal', $tanggal)
+                ->where('pegawai_id', $pegawai_id)
+                ->get(),
+        ]);
+    }
+
+
+
     public function index()
     {
-        $pegawais = Pegawai::all();
-        return view('admin.jadwalpegawai', compact('pegawais'));
+        $pegawais = Pegawai::where('status', 'active')->get();
+        $lokasis = Lokasi::where('status', 'active')->get();
+        $kegiatans = Kegiatan::where('status', 'active')->get();
+
+        return view('admin.jadwalpegawai', compact('pegawais', 'kegiatans', 'lokasis'));
     }
 
     /**
@@ -143,10 +160,39 @@ class JadwalController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $r)
     {
-        //
+        Schedule::create([
+            'tanggal'     => $r->tanggal,
+            'pegawai_id'  => $r->pegawai_id,
+            'kegiatan_id' => $r->kegiatan_id,
+            'lokasi_id'   => $r->lokasi_id,
+        ]);
+
+        $schedules = Schedule::with(['kegiatan', 'lokasi'])
+            ->where('tanggal', $r->tanggal)
+            ->where('pegawai_id', $r->pegawai_id)
+            ->get();
+
+        return response()->json(['schedules' => $schedules]);
     }
+
+    public function delete($id, Request $r)
+    {
+        $schedule = Schedule::findOrFail($id);
+        $tanggal = $schedule->tanggal;
+        $pegawai = $schedule->pegawai_id;
+
+        $schedule->delete();
+
+        $schedules = Schedule::with(['kegiatan', 'lokasi'])
+            ->where('tanggal', $tanggal)
+            ->where('pegawai_id', $pegawai)
+            ->get();
+
+        return response()->json(['schedules' => $schedules]);
+    }
+
 
     /**
      * Display the specified resource.

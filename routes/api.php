@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\PegawaiController;
+use App\Http\Controllers\JadwalController;
+
 
 Route::post('/register', [PegawaiController::class, 'register']);
 Route::post('/login', [PegawaiController::class, 'login']);
@@ -25,3 +27,4 @@ Route::get('/test', function () {
 });
 
 
+Route::post('/jadwal/save', [JadwalController::class, 'save']);

@@ -13,4 +13,10 @@ class Lokasi extends Model
         'ip_wifi',
         'status',
     ];
+
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
+    }
 }

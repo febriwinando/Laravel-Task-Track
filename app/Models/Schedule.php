@@ -12,6 +12,7 @@ class Schedule extends Model
         'tanggal',
         'pegawai_id',
         'kegiatan_id',
+        'lokasi_id',
         'keterangan'
     ];
 
@@ -23,5 +24,9 @@ class Schedule extends Model
     public function kegiatan()
     {
         return $this->belongsTo(Kegiatan::class);
+    }
+    public function lokasi()
+    {
+        return $this->belongsTo(Lokasi::class);
     }
 }

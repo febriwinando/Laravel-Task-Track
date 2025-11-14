@@ -12,7 +12,7 @@
 
     <div class="card">
         <div class="card-title fw-semibold card-header d-flex justify-content-between align-items-center mb-3">
-            <h3>List Location</h3>
+            <h3>List Locations</h3>
             <a href="{{ route('lokasi.create') }}" class="btn btn-primary">+ Add New Location</a>
         </div>
         <div class="card-body">

@@ -17,55 +17,65 @@ class KegiatanController extends Controller
      */
     public function index()
     {
-        $kegiatans = Kegiatan::all();
+        $kegiatans = Kegiatan::orderByDesc('id')->get();
         return view('admin.kegiatan', compact('kegiatans'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('admin.tambahkegiatan');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'task' => 'required|string|max:255',
+            'keterangan' => 'nullable|string',
+            'status' => 'required|in:active,inactive',
+        ]);
+
+        Kegiatan::create($request->only([
+            'task',
+            'keterangan',
+            'status'
+        ]));
+
+        return redirect()->route('kegiatan.index')
+                         ->with('success', 'Task berhasil ditambahkan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit($id)
     {
-        //
+        $kegiatan = Kegiatan::findOrFail($id);
+        return view('kegiatan.form', compact('kegiatan'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'task' => 'required|string|max:255',
+            'keterangan' => 'nullable|string',
+            'status' => 'required|in:active,inactive',
+        ]);
+
+        $kegiatan = Kegiatan::findOrFail($id);
+
+        $kegiatan->update($request->only([
+            'task',
+            'keterangan',
+            'status'
+        ]));
+
+        return redirect()->route('kegiatan.index')
+                         ->with('success', 'Task berhasil diperbarui!');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy($id)
     {
-        //
-    }
+        $kegiatan = Kegiatan::findOrFail($id);
+        $kegiatan->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('kegiatan.index')
+                         ->with('success', 'Task berhasil dihapus!');
     }
 }

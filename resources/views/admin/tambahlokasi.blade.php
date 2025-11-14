@@ -68,6 +68,14 @@
                                                 required>
                                             @error('ip_wifi') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
+                                        <div class="col-sm-6 mb-3">
+                                            <label for="status" class="form-label">Status</label>
+                                            <select name="status" id="status" class="form-control rounded-pill @error('status') is-invalid @enderror">
+                                                <option value="active"  {{ old('status', $lokasi->status ?? '') == 'active' ? 'selected' : '' }}>Active</option>
+                                                <option value="inactive" {{ old('status', $lokasi->status ?? '') == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                            </select>
+                                            @error('status') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        </div>
                                     </div>
 
                                     {{-- BUTTONS --}}

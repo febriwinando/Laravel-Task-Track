@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('nomor_wa');
             $table->enum('level', ['officer', 'verifier']);
             $table->enum('status', ['active', 'inactive']);
+             $table->string('inactive_reason')->nullable();
             $table->string('password');
             $table->string('foto')->nullable(); // menyimpan nama file gambar
             $table->timestamps();

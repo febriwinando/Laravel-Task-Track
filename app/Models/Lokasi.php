@@ -11,5 +11,6 @@ class Lokasi extends Model
         'floor',
         'ssid',
         'ip_wifi',
+        'status',
     ];
 }

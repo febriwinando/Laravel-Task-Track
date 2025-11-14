@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('floor');
             $table->string('ssid');
             $table->string('ip_wifi');
+            $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
         });
     }

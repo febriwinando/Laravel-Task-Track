@@ -35,6 +35,7 @@ class LokasiController extends Controller
             'floor' => 'required|string|max:255',
             'ssid' => 'required|string|max:255',
             'ip_wifi' => 'required|string|max:255',
+            'status' => 'required|in:active,inactive',
         ]);
 
         Lokasi::create($validated);
@@ -69,6 +70,7 @@ class LokasiController extends Controller
             'floor' => 'required|string|max:255',
             'ssid' => 'required|string|max:255',
             'ip_wifi' => 'required|string|max:255',
+            'status' => 'required|in:active,inactive',
         ]);
 
         $lokasi = Lokasi::findOrFail($id);

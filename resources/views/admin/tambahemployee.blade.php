@@ -93,12 +93,33 @@
                                         {{-- STATUS --}}
                                         <div class="col-sm-6 mb-3">
                                             <label for="status" class="form-label">Status</label>
-                                            <select name="status" class="form-control rounded-pill @error('status') is-invalid @enderror">
-                                                <option value="active" {{ old('status', $pegawai->status ?? '') == 'active' ? 'selected' : '' }}>Active</option>
+                                            <select name="status" id="status" class="form-control rounded-pill @error('status') is-invalid @enderror">
+                                                <option value="active"  {{ old('status', $pegawai->status ?? '') == 'active' ? 'selected' : '' }}>Active</option>
                                                 <option value="inactive" {{ old('status', $pegawai->status ?? '') == 'inactive' ? 'selected' : '' }}>Inactive</option>
                                             </select>
                                             @error('status') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
+
+                                        {{-- ALASAN INACTIVE --}}
+                                        <div class="col-sm-6 mb-3" id="inactive_reason_container" style="display: none;">
+                                            <label for="inactive_reason" class="form-label">Inactive Reason</label>
+                                            <select name="inactive_reason" id="inactive_reason" class="form-control rounded-pill @error('inactive_reason') is-invalid @enderror">
+                                                <option value="">-- Select Reason --</option>
+                                                <option value="resigned" {{ old('inactive_reason', $pegawai->inactive_reason ?? '') == 'resigned' ? 'selected' : '' }}>Resigned</option>
+                                                <option value="retired" {{ old('inactive_reason', $pegawai->inactive_reason ?? '') == 'retired' ? 'selected' : '' }}>Retired</option>
+                                                <option value="deceased" {{ old('inactive_reason', $pegawai->inactive_reason ?? '') == 'deceased' ? 'selected' : '' }}>Deceased</option>
+                                                <option value="terminated" {{ old('inactive_reason', $pegawai->inactive_reason ?? '') == 'terminated' ? 'selected' : '' }}>Terminated</option>
+                                                <option value="contract ended" {{ old('inactive_reason', $pegawai->inactive_reason ?? '') == 'contract ended' ? 'selected' : '' }}>Contract Ended</option>
+                                                <option value="suspended" {{ old('inactive_reason', $pegawai->inactive_reason ?? '') == 'suspended' ? 'selected' : '' }}>Suspended</option>
+                                                <option value="unpaid leave" {{ old('inactive_reason', $pegawai->inactive_reason ?? '') == 'unpaid leave' ? 'selected' : '' }}>Unpaid Leave</option>
+                                                <option value="laid off" {{ old('inactive_reason', $pegawai->inactive_reason ?? '') == 'laid off' ? 'selected' : '' }}>Laid Off</option>
+                                                <option value="absconded" {{ old('inactive_reason', $pegawai->inactive_reason ?? '') == 'absconded' ? 'selected' : '' }}>Absconded</option>
+
+
+                                            </select>
+                                            @error('inactive_reason') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        </div>
+
 
                                         {{-- PASSWORD --}}
                                         <div class="col-sm-6 mb-3">
@@ -183,5 +204,25 @@
                             bsAlert.close();
                         }
                     }, 3000);
+
+                    // Show/hide inactive reason field
+                    function toggleInactiveReason() {
+                        const status = document.getElementById('status').value;
+                        const container = document.getElementById('inactive_reason_container');
+
+                        if (status === 'inactive') {
+                            container.style.display = 'block';
+                        } else {
+                            container.style.display = 'none';
+                            document.getElementById('inactive_reason').value = '';
+                        }
+                    }
+
+                    // Run on page load
+                    toggleInactiveReason();
+
+                    // Run every time status changes
+                    document.getElementById('status').addEventListener('change', toggleInactiveReason);
+
                 </script>
             @endsection

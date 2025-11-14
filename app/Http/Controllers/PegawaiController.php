@@ -38,7 +38,8 @@ class PegawaiController extends Controller
             'email' => 'required|email',
             'nomor_wa' => 'required',
             'level' => 'required',
-            'status' => 'required',
+            'status' => 'required|in:active,inactive',
+            'inactive_reason' => 'nullable|required_if:status,inactive',
             'password' => 'required|confirmed|min:8',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // maksimal 2MB
         ]);
@@ -50,7 +51,7 @@ class PegawaiController extends Controller
         }
 
         // Simpan ke database
-        \App\Models\Pegawai::create($validated);
+        Pegawai::create($validated);
 
         return redirect()->route('pegawai.index')->with('success', 'Employee added successfully!');
     }
@@ -84,6 +85,7 @@ class PegawaiController extends Controller
             'nomor_wa' => 'required|string|max:20',
             'level' => 'required|string',
             'status' => 'required|string',
+            'inactive_reason' => 'nullable|required_if:status,inactive',
             'password' => 'nullable|min:8|confirmed',
             'foto' => 'nullable|image|max:2048',
         ]);

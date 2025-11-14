@@ -26,7 +26,7 @@
 
                                     <div class="row">
                                         {{-- BUILDING --}}
-                                        <div class="col-sm-6 mb-3">
+                                        <div class="col-sm-12 mb-3">
                                             <label for="task" class="form-label">Task</label>
                                             <input type="text"
                                                 class="rounded-pill form-control @error('task') is-invalid @enderror"
@@ -35,7 +35,25 @@
                                                 required>
                                             @error('task') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>
+                                        <div class="mb-3">
+                                            <label for="keterangan" class="form-label">Information of Task</label>
+                                            <textarea name="keterangan" id="keterangan" 
+                                                class="form-control @error('keterangan') is-invalid @enderror" 
+                                                rows="3">{{ old('keterangan', $kegiatan->keterangan ?? '') }}</textarea>
 
+                                            @error('keterangan')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
+                                        </div>
+
+                                        <div class="col-sm-12 mb-3">
+                                            <label for="status" class="form-label">Status</label>
+                                            <select name="status" id="status" class="form-control rounded-pill @error('status') is-invalid @enderror">
+                                                <option value="active"  {{ old('status', $lokasi->status ?? '') == 'active' ? 'selected' : '' }}>Active</option>
+                                                <option value="inactive" {{ old('status', $lokasi->status ?? '') == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                            </select>
+                                            @error('status') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                                        </div>
 
                                     {{-- BUTTONS --}}
                                     <div class="d-flex justify-content-end mt-3">

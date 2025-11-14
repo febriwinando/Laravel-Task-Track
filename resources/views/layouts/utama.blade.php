@@ -8,6 +8,10 @@
   <link rel="shortcut icon" type="image/png" href="{{ asset('storage/assets/images/logotasktrack.png') }}" />
   <link rel="stylesheet" href="{{ asset('storage/assets/css/simplebar.css') }}">
   <link rel="stylesheet" href="{{ asset('storage/assets/css/styles.min.css') }}" />
+
+
+    <!-- FullCalendar CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -95,7 +99,7 @@
                     <span class="hide-menu">Schedules</span>
                     </li>
                     <li class="sidebar-item">
-                    <a class="sidebar-link" href="./icon-tabler.html" aria-expanded="false">
+                    <a class="sidebar-link" href="/jadwal" aria-expanded="false">
                         <span>
                                 <img src="{{ asset('storage/assets/icons/editcalendar.svg') }}" width="30" alt="" />
                         </span>
@@ -181,6 +185,9 @@
     <script src="{{ asset('storage/assets/js/sidebarmenu.js') }}"></script>
     <script src="{{ asset('storage/assets/js/app.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/iconify-icon@1.0.8/dist/iconify-icon.min.js') }}"></script>
+    <!-- FullCalendar JS -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    @yield('scripts')
 </body>
 
 </html>

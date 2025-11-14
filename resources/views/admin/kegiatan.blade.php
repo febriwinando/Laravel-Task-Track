@@ -17,7 +17,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive rounded">
-                <table class="table table-striped align-middle table-hover">
+                <table class="table table-striped align-middle table-hover table-striped-columns table-sm">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -27,7 +27,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="table-group-divider">
                         @forelse ($kegiatans as $kegiatan)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>

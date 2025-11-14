@@ -17,4 +17,9 @@ class Pegawai extends Model
     protected $fillable = ['name', 'nik', 'employee_id', 'email', 'nomor_wa', 'level', 'status', 'inactive_reason', 'password', 'foto'];
 
     protected $hidden = ['password', 'remember_token'];
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
+    }
 }

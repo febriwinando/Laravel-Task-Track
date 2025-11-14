@@ -49,8 +49,8 @@
                                         <div class="col-sm-12 mb-3">
                                             <label for="status" class="form-label">Status</label>
                                             <select name="status" id="status" class="form-control rounded-pill @error('status') is-invalid @enderror">
-                                                <option value="active"  {{ old('status', $lokasi->status ?? '') == 'active' ? 'selected' : '' }}>Active</option>
-                                                <option value="inactive" {{ old('status', $lokasi->status ?? '') == 'inactive' ? 'selected' : '' }}>Inactive</option>
+                                                <option value="active"  {{ old('status', $kegiatan->status ?? '') == 'active' ? 'selected' : '' }}>Active</option>
+                                                <option value="inactive" {{ old('status', $kegiatan->status ?? '') == 'inactive' ? 'selected' : '' }}>Inactive</option>
                                             </select>
                                             @error('status') <div class="invalid-feedback">{{ $message }}</div> @enderror
                                         </div>

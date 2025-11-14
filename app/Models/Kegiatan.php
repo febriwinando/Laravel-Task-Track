@@ -14,4 +14,9 @@ class Kegiatan extends Model
         'keterangan',
         'status',
     ];
+
+    public function schedules()
+    {
+        return $this->hasMany(Schedule::class);
+    }
 }

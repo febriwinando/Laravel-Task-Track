@@ -17,21 +17,22 @@
         </div>
         <div class="card-body">
             <div class="table-responsive rounded">
-                <table class="table table-striped align-middle table-hover">
+                <table class="table table-striped align-middle table-hover table-striped-columns table-sm">
                     <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Name</th>
-                            <th>ID Card</th>
-                            <th>Employee ID</th>
-                            <th>Email</th>
-                            <th>Phone Number</th>
-                            <th>Level</th>
-                            <th>Photo</th>
-                            <th>Action</th>
+                            <th scope="col">No</th>
+                            <th scope="col" class="w-50">Name</th>
+                            <th scope="col">ID Card</th>
+                            <th scope="col">Employee ID</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone Number</th>
+                            <th scope="col">Level</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Photo</th>
+                            <th scope="col">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="table-group-divider">
                         @forelse ($pegawais as $pegawai)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
@@ -41,6 +42,7 @@
                                 <td>{{ $pegawai->email }}</td>
                                 <td>{{ $pegawai->nomor_wa }}</td>
                                 <td>{{ $pegawai->level }}</td>
+                                <td>{{ $pegawai->status }}</td>
                                 <td>
                                     @if ($pegawai->foto)
                                         <img src="{{ asset('storage/' . $pegawai->foto) }}" alt="Foto" width="60" height="60" class="rounded-circle object-fit-cover">

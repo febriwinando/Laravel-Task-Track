@@ -47,7 +47,7 @@ class KegiatanController extends Controller
     public function edit($id)
     {
         $kegiatan = Kegiatan::findOrFail($id);
-        return view('kegiatan.form', compact('kegiatan'));
+        return view('admin.tambahkegiatan', compact('kegiatan'));
     }
 
     public function update(Request $request, $id)

@@ -20,6 +20,8 @@ return new class extends Migration
             $table->text('keterangan')->nullable();
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();  
             $table->string('created_ip')->nullable();
+            $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();  
+            $table->string('updated_ip')->nullable();
             $table->timestamps();
         });
     }

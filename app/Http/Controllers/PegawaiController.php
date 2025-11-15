@@ -107,6 +107,9 @@ class PegawaiController extends Controller
             unset($validated['password']);
         }
 
+        $validated['updated_by']=auth()->id();
+        $validated['updated_ip']=$request->ip();
+
         $pegawai->update($validated);
 
         return redirect()->route('pegawai.index')->with('success', 'Employee updated successfully!');

@@ -66,7 +66,10 @@ class KegiatanController extends Controller
             'task',
             'keterangan',
             'status'
-        ]));
+        ] + [
+                'updated_by' => auth()->id(),
+                'updated_ip' => $request->ip(),
+            ]));
 
         return redirect()->route('kegiatan.index')
                          ->with('success', 'Task berhasil diperbarui!');

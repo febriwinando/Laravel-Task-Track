@@ -25,6 +25,8 @@ return new class extends Migration
             $table->string('foto')->nullable(); // menyimpan nama file gambar
             $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();  
             $table->string('created_ip')->nullable();
+            $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();  
+            $table->string('updated_ip')->nullable();
             $table->timestamps();
         });
     }

@@ -29,6 +29,8 @@ class User extends Authenticatable
         'password',
         'foto',
         'created_by', 'created_ip',
+        'updated_by', 'updated_ip',
+
     ];
 
     /**

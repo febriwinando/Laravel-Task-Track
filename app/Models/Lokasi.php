@@ -13,6 +13,7 @@ class Lokasi extends Model
         'ip_wifi',
         'status',
         'created_by', 'created_ip',
+        'updated_by', 'updated_ip',
     ];
 
 

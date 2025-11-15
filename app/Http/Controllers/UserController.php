@@ -96,6 +96,9 @@ class UserController extends Controller
             $data['password'] = Hash::make($request->password);
         }
 
+        $data['updated_by']=auth()->id();
+        $data['updated_ip']=$request->ip();
+
         $user->update($data);
 
         return redirect()->route('users.index')->with('success', 'User berhasil diperbarui');

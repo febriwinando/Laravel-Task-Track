@@ -76,6 +76,9 @@ class LokasiController extends Controller
             'status' => 'required|in:active,inactive',
         ]);
 
+        $validated['updated_by']=auth()->id();
+        $validated['updated_ip']=$request->ip();
+
         $lokasi = Lokasi::findOrFail($id);
         $lokasi->update($validated);
 

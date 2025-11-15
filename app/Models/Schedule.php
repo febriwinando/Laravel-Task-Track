@@ -15,6 +15,8 @@ class Schedule extends Model
         'lokasi_id',
         'keterangan',
         'created_by', 'created_ip',
+        'updated_by', 'updated_ip',
+
     ];
 
     public function pegawai()

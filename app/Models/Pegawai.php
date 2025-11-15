@@ -24,6 +24,7 @@ class Pegawai extends Model
         'status', 
         'inactive_reason', 
         'password', 
+        'created_by', 'created_ip',
         'foto'];
 
     protected $hidden = ['password', 'remember_token'];

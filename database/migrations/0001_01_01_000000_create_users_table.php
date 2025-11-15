@@ -18,11 +18,13 @@ return new class extends Migration
             $table->string('employee_id')->unique();
             $table->string('email')->unique();
             $table->string('nomor_wa');
-            $table->enum('level', ['admininistrator', 'staff'])->default('staff');
+            $table->enum('level', ['administrator', 'staff'])->default('staff');
             $table->enum('status', ['active', 'inactive']);
             $table->string('inactive_reason')->nullable();
             $table->string('password');
             $table->string('foto')->nullable();
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();  
+            $table->string('created_ip')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

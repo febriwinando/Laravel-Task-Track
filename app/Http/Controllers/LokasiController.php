@@ -38,6 +38,9 @@ class LokasiController extends Controller
             'status' => 'required|in:active,inactive',
         ]);
 
+        $validated['created_by']=auth()->id();
+        $validated['created_ip']=$request->ip();
+
         Lokasi::create($validated);
 
         return redirect()->route('lokasi.index')

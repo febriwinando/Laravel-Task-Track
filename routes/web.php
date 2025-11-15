@@ -13,25 +13,34 @@ use App\Http\Controllers\UserController;
 Route::resource('users', UserController::class);
 
 // Tampilkan form login
-Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::get('/', [LoginController::class, 'login'])->name('login');
 
-//Pegawai
-Route::resource('pegawai', PegawaiController::class);
 
-//Lokasi
-Route::resource('lokasi', LokasiController::class);
+Route::get('/', [LoginController::class, 'showLogin'])->name('login');
 
-//Kegiatan
-Route::resource('kegiatan', KegiatanController::class);
+Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
 
-// Jadwal
-Route::get('/jadwal/modal-data/{tanggal}/{pegawai_id}', [JadwalController::class, 'modalData']);
-// Menyimpan schedule (bukan kegiatan-list)
-Route::post('/jadwal/save', [JadwalController::class, 'save']);
-Route::delete('/jadwal/delete/{id}', [JadwalController::class, 'delete']);
+Route::middleware('auth')->group(function () {
+     //Pegawai
+    Route::resource('pegawai', PegawaiController::class)->middleware('role:administrator,staff');
 
-Route::resource('jadwal', JadwalController::class);
+    //Lokasi
+    Route::resource('lokasi', LokasiController::class);
+
+    //Kegiatan
+    Route::resource('kegiatan', KegiatanController::class);
+
+    // Jadwal
+    Route::get('/jadwal/modal-data/{tanggal}/{pegawai_id}', [JadwalController::class, 'modalData']);
+    // Menyimpan schedule (bukan kegiatan-list)
+    Route::post('/jadwal/save', [JadwalController::class, 'save']);
+    Route::delete('/jadwal/delete/{id}', [JadwalController::class, 'delete']);
+
+    Route::resource('jadwal', JadwalController::class);
+
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+});
+
 
 // Route::get('/jadwal/kegiatan/{tanggal}', [JadwalController::class, 'getKegiatan']);
 // Route::post('/jadwal/kegiatan', [JadwalController::class, 'storeKegiatan']);

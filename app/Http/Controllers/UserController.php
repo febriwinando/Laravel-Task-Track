@@ -30,19 +30,30 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'username' => 'required|min:4|unique:users',
+        $validated = $request->validate([
+            'name' => 'required|min:4|unique:users',
             'email'    => 'required|email|unique:users',
-            'level'    => 'required',
-            'password' => 'required|min:6',
+            'nik' => 'required',
+            'employee_id' => 'required',
+            'nomor_wa' => 'required',
+            'level' => 'required',
+            'status' => 'required|in:active,inactive',
+            'inactive_reason' => 'nullable|required_if:status,inactive',
+            'password' => 'required|min:8',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048'
         ]);
 
-        User::create([
-            'username' => $request->username,
-            'email'    => $request->email,
-            'level'    => $request->level,
-            'password' => Hash::make($request->password),
-        ]);
+        $validated['created_by']=auth()->id();
+        $validated['created_ip']=$request->ip();
+
+        // Simpan foto jika ada
+        if ($request->hasFile('foto')) {
+            $path = $request->file('foto')->store('pegawai', 'public'); // storage/app/public/pegawai
+            $validated['foto'] = $path;
+        }
+
+        // Simpan ke database
+        User::create($validated);
 
         return redirect()->route('users.index')->with('success', 'User berhasil dibuat');
     }

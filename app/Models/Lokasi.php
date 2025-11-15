@@ -12,6 +12,7 @@ class Lokasi extends Model
         'ssid',
         'ip_wifi',
         'status',
+        'created_by', 'created_ip',
     ];
 
 

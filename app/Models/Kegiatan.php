@@ -13,6 +13,7 @@ class Kegiatan extends Model
         'task',
         'keterangan',
         'status',
+        'created_by', 'created_ip',
     ];
 
     public function schedules()

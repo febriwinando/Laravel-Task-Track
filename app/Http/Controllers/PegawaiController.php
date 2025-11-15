@@ -42,7 +42,11 @@ class PegawaiController extends Controller
             'inactive_reason' => 'nullable|required_if:status,inactive',
             'password' => 'required|confirmed|min:8',
             'foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048', // maksimal 2MB
+
         ]);
+
+        $validated['created_by']=auth()->id();
+        $validated['created_ip']=$request->ip();
 
         // Simpan foto jika ada
         if ($request->hasFile('foto')) {

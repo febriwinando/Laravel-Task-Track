@@ -81,6 +81,8 @@ class JadwalController extends Controller
             'pegawai_id'  => $req->pegawai_id,
             'kegiatan_id' => $req->kegiatan_id,
             'lokasi_id'   => $req->lokasi_id,
+            'created_by'  => auth()->id(),
+            'created_ip'  => $req->ip(),
         ]);
 
         $schedules = Schedule::with(['kegiatan', 'lokasi'])

@@ -34,11 +34,13 @@ class KegiatanController extends Controller
             'status' => 'required|in:active,inactive',
         ]);
 
-        Kegiatan::create($request->only([
-            'task',
-            'keterangan',
-            'status'
-        ]));
+        Kegiatan::create(
+            $request->only(['task', 'keterangan', 'status']) + [
+                'created_by' => auth()->id(),
+                'created_ip' => $request->ip(),
+            ]
+        );
+
 
         return redirect()->route('kegiatan.index')
                          ->with('success', 'Task berhasil ditambahkan!');

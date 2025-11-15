@@ -23,6 +23,8 @@ return new class extends Migration
             $table->string('inactive_reason')->nullable();
             $table->string('password');
             $table->string('foto')->nullable(); // menyimpan nama file gambar
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();  
+            $table->string('created_ip')->nullable();
             $table->timestamps();
         });
     }

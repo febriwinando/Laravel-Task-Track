@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('task');
             $table->text('keterangan')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();  
+            $table->string('created_ip')->nullable();
             $table->timestamps();
         });
     }

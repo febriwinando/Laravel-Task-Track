@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('kegiatan_id')->constrained('kegiatans')->onDelete('cascade');
             $table->foreignId('lokasi_id')->constrained('kegiatans')->onDelete('cascade');
             $table->text('keterangan')->nullable();
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();  
+            $table->string('created_ip')->nullable();
             $table->timestamps();
         });
     }

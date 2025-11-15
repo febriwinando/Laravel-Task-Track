@@ -24,21 +24,25 @@
                             <img src="{{ asset('storage/assets/images/tt4.png') }}" width="150" alt="">
                             </a>
                             <p class="text-center">Rekam Aktivitas Pegawai</p>
-                            <form>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Username</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                            </div>
-                            <div class="mb-4">
-                                <label for="exampleInputPassword1" class="form-label">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1">
-                            </div>
-                            <div class="d-flex align-items-center justify-content-between mb-4">
-                                <a class="text-primary fw-bold" href="./index.html">Forgot Password ?</a>
-                            </div>
-                            <a href="./index.html" class="btn btn-primary w-100 py-8 fs-4 mb-4">Sign In</a>
+                            <form method="POST" action="/login">
+                                @csrf
+                                <div class="mb-3">
+                                    <label for="exampleInputEmail1" class="form-label">Username</label>
+                                    <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                                    <input name="password" type="password" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="d-flex align-items-center justify-content-between mb-4">
+                                    <a class="text-primary fw-bold" href="./index.html">Forgot Password ?</a>
+                                </div>
+                                <button class="btn btn-primary w-100 py-8 fs-4 mb-4">Login</button>
 
                             </form>
+                            @if(session('error'))
+                                <div class="alert alert-danger">{{ session('error') }}</div>
+                            @endif
                         </div>
                     </div>
                 </div>

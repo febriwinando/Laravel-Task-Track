@@ -1,11 +1,11 @@
             @extends('layouts.utama') {{-- Pakai layout utama --}}
 
-            @section('title', isset($user) ? 'Edit Employee' : 'Add New Employee' )
+            @section('title', isset($user) ? 'Edit Admin' : 'Add New Admin' )
 
             @section('content')
                         <div class="card">
                             <h5 class="card-title fw-semibold card-header">
-                                {{ isset($user) ? 'Edit User' : 'Add New User' }}
+                                {{ isset($user) ? 'Edit Admin' : 'Add New Admin' }}
                             </h5>
                             <div class="card-body">
                                 {{-- ALERT SUKSES --}}

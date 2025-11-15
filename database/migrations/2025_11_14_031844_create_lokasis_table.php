@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('ssid');
             $table->string('ip_wifi');
             $table->enum('status', ['active', 'inactive']);
+            $table->foreignId('created_by')->nullable()->constrained('users')->nullOnDelete();  
+            $table->string('created_ip')->nullable();
             $table->timestamps();
         });
     }

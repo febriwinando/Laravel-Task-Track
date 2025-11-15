@@ -14,7 +14,17 @@ class Pegawai extends Model
 {
     use HasFactory, Notifiable, HasApiTokens;
 
-    protected $fillable = ['name', 'nik', 'employee_id', 'email', 'nomor_wa', 'level', 'status', 'inactive_reason', 'password', 'foto'];
+    protected $fillable = [
+        'name', 
+        'nik', 
+        'employee_id', 
+        'email', 
+        'nomor_wa', 
+        'level', 
+        'status', 
+        'inactive_reason', 
+        'password', 
+        'foto'];
 
     protected $hidden = ['password', 'remember_token'];
 

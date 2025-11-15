@@ -1,9 +1,6 @@
 @extends('layouts.utama')
-
+@section('title', 'List Locations')
 @section('content')
-<div class="container mt-4">
-
-
     @if (session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
@@ -57,5 +54,5 @@
             </div>
         </div>
     </div>
-</div>
+
 @endsection

@@ -1,6 +1,6 @@
             @extends('layouts.utama') {{-- Pakai layout utama --}}
 
-            @section('title', 'Dashboad Aduan')
+            @section('title', isset($lokasi) ? 'Edit Location' : 'Add New Location')
 
             @section('content')
                         <div class="card">

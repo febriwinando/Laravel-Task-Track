@@ -1,8 +1,7 @@
 @extends('layouts.utama')
+@section('title', 'List Tasks')
 
 @section('content')
-<div class="container mt-4">
-
 
     @if (session('success'))
         <div class="alert alert-success">
@@ -53,5 +52,4 @@
             </div>
         </div>
     </div>
-</div>
 @endsection

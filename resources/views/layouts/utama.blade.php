@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SeoDash Free Bootstrap Admin Template by Adminmart</title>
+    <title>@yield('title', 'Task Track')</title>
     <link rel="shortcut icon" type="image/png" href="{{ asset('storage/assets/images/logotasktrack.png') }}" />
     <link rel="stylesheet" href="{{ asset('storage/assets/css/simplebar.css') }}">
     <link rel="stylesheet" href="{{ asset('storage/assets/css/styles.min.css') }}" />
@@ -34,6 +34,26 @@
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
                 <ul id="sidebarnav">
+                    <li class="nav-small-cap">
+                        <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
+                        <span class="hide-menu">Admin</span>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/users/create" aria-expanded="false">
+                            <span>
+                                <img src="{{ asset('storage/assets/icons/username.svg') }}" width="30" alt="" />
+                            </span>
+                            <span class="hide-menu">Add User</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link" href="/users" aria-expanded="false">
+                            <span>
+                                <img src="{{ asset('storage/assets/icons/username.svg') }}" width="30" alt="" />
+                            </span>
+                            <span class="hide-menu">List Users</span>
+                        </a>
+                    </li>
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
                         <span class="hide-menu">Employees</span>
@@ -107,14 +127,14 @@
                         <span class="hide-menu">Manage Schedules</span>
                     </a>
                     </li>
-                    <li class="sidebar-item">
+                    {{-- <li class="sidebar-item">
                     <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
                         <span>
                                 <img src="{{ asset('storage/assets/icons/calendar.svg') }}" width="30" alt="" />
                         </span>
                         <span class="hide-menu">List Schedules</span>
                     </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </nav>
             <!-- End Sidebar navigation -->

@@ -38,7 +38,7 @@
                         <div class="modal-content">
                         
                         <div class="modal-header">
-                            <h5 class="modal-title">Manage Kegiatan - <span id="modal-date"></span></h5>
+                            <h5 class="modal-title">Manage Employee Activities - <span id="modal-date"></span></h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                         </div>
 
@@ -47,24 +47,17 @@
                             <div class="row">
 
                                 <div class="col-md-6 mb-3">
-                                    <label class="fw-semibold">Pilih Kegiatan</label>
+                                    <label class="fw-semibold">Select Task</label>
                                     <select id="select-kegiatan" class="form-control selectpicker" data-live-search="true">
-                                        {{-- @foreach ($kegiatans as $kegiatan)
-                                            <option value="{{ $kegiatan->id }}" data-name="{{ $kegiatan->task }}">{{ $kegiatan->task }}</option>
-                                        @endforeach --}}
 
                                     </select>
                                 </div>
 
                                 <div class="col-md-6 mb-3">
-                                    <label class="fw-semibold">Pilih Lokasi</label>
+                                    <label class="fw-semibold">Select Location</label>
                                     <select id="select-lokasi" 
                                             class="form-control selectpicker"
                                             data-live-search="true">
-                                        {{-- @foreach ($lokasis as $lokasi)
-                                            <option value="{{ $lokasi->id }}" data-name="{{ $lokasi->task }} - {{ $lokasi->floor }}">{{ $lokasi->building }} - {{ $lokasi->floor }}</option>
-                                        @endforeach --}}
-
                                     </select>
                                 </div>
 
@@ -74,8 +67,8 @@
                                 <table class="table table-bordered" id="schedule-table">
                                     <thead>
                                         <tr>
-                                            <th>Kegiatan</th>
-                                            <th>Lokasi</th>
+                                            <th>Tasks</th>
+                                            <th>Locations</th>
                                             <th></th>
                                         </tr>
                                     </thead>
@@ -87,7 +80,7 @@
                         </div>
 
                         <div class="modal-footer">
-                            <button class="btn btn-success" id="btnSave">Simpan</button>
+                            <button class="btn btn-success" id="btnSave">Save</button>
                         </div>
                         </div>
                     </div>
@@ -168,36 +161,6 @@
             loadCalendarEvents();
         });
 
-
-        // =====================================
-        // OPEN MODAL & LOAD CHECKBOX
-        // =====================================
-        // function openModal(tanggal) {
-
-        //     $('#modal-date').text(tanggal);
-        //     $('#modalKegiatan').modal('show');
-
-        //     $.get(`/jadwal/kegiatan/${tanggal}/${pegawai_id}`, function (res) {
-
-        //         $('#kegiatan-container').empty();
-
-        //         res.task_list.forEach(task => {
-        //             let checked = res.selected.includes(task.id) ? 'checked' : '';
-        //             let row = `
-        //             <div class="form-check mb-2">
-        //                 <input class="form-check-input kegiatan-check"
-        //                     type="checkbox" value="${task.id}"
-        //                     id="kegiatan_${task.id}" ${checked}>
-        //                 <label class="form-check-label fw-semibold" for="kegiatan_${task.id}">
-        //                     ${task.task}
-        //                 </label>
-        //             </div>`;
-        //             $('#kegiatan-container').append(row);
-        //         });
-
-        //     });
-        // }
-
         function openModal(tanggal) {
 
             $('#modal-date').text(tanggal);
@@ -239,7 +202,7 @@
                             <td>${s.lokasi.building} / ${s.lokasi.floor}</td>
                             <td>
                                 <button class="btn btn-danger btn-sm btnDelete" data-id="${s.id}">
-                                    Hapus
+                                    Delete
                                 </button>
                             </td>
                         </tr>
@@ -248,32 +211,6 @@
             }
 
 
-        // =====================================
-        // SAVE SCHEDULE
-        // =====================================
-        // $('#btnSave').click(function () {
-
-        //     let tanggal = $('#modal-date').text();
-
-        //     let checked = [];
-        //     $('.kegiatan-check:checked').each(function () {
-        //         checked.push($(this).val());
-        //     });
-
-        //     $.post('/jadwal/kegiatan', {
-        //         _token: '{{ csrf_token() }}',
-        //         tanggal: tanggal,
-        //         pegawai_id: pegawai_id,
-        //         kegiatan_ids: checked
-        //     }, function () {
-
-        //         $('#modalKegiatan').modal('hide');
-        //         loadCalendarEvents();
-
-        //         alert("Schedule berhasil disimpan!");
-        //     });
-
-        // });
 
         $('#btnSave').click(function () {
 
@@ -328,7 +265,7 @@
                     html += `<div class="mb-2 p-2 rounded bg-info-subtle">${r.kegiatan.task}</div>`;
                 });
 
-                if (html === "") html = "<i class='text-muted'>Tidak ada kegiatan</i>";
+                if (html === "") html = "<i class='text-muted'>No activities.</i>";
 
                 // replace bagian "You have"
                 $('#today-info').html(html);

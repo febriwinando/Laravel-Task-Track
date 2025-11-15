@@ -40,13 +40,13 @@
                                     <form action="{{ route('lokasi.destroy', $lokasi->id) }}" method="POST" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-sm btn-danger">Hapus</button>
+                                        <button class="btn btn-sm btn-danger">Delete</button>
                                     </form>
                                 </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="9" class="text-center text-muted">Belum ada data pegawai.</td>
+                                <td colspan="9" class="text-center text-muted">No location data available.</td>
                             </tr>
                         @endforelse
                     </tbody>

@@ -55,7 +55,7 @@ class UserController extends Controller
         // Simpan ke database
         User::create($validated);
 
-        return redirect()->route('users.index')->with('success', 'User berhasil dibuat');
+        return redirect()->route('users.index')->with('success', 'User created successfully.');
     }
 
     /**
@@ -71,7 +71,9 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+
+
+        return view('user.tambahuser', compact('user'));
     }
 
     /**
@@ -80,14 +82,14 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'username' => 'required|min:4|unique:users,username,' . $user->id,
+            'name' => 'required|min:4|unique:users,name,' . $user->id,
             'email'    => 'required|email|unique:users,email,' . $user->id,
             'level'    => 'required',
             'password' => 'nullable|min:6',
         ]);
 
         $data = [
-            'username' => $request->username,
+            'name' => $request->name,
             'email'    => $request->email,
             'level'    => $request->level,
         ];
@@ -99,9 +101,14 @@ class UserController extends Controller
         $data['updated_by']=auth()->id();
         $data['updated_ip']=$request->ip();
 
+        if ($request->hasFile('foto')) {
+            $path = $request->file('foto')->store('pegawai', 'public'); // storage/app/public/pegawai
+            $data['foto'] = $path;
+        }
+
         $user->update($data);
 
-        return redirect()->route('users.index')->with('success', 'User berhasil diperbarui');
+        return redirect()->route('users.index')->with('success', 'User successfully updated.');
     }
 
     /**
@@ -110,6 +117,6 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User berhasil dihapus');
+        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
 }

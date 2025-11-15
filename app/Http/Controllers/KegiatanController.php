@@ -43,7 +43,7 @@ class KegiatanController extends Controller
 
 
         return redirect()->route('kegiatan.index')
-                         ->with('success', 'Task berhasil ditambahkan!');
+                         ->with('success', 'Task added successfully!');
     }
 
     public function edit($id)
@@ -72,7 +72,7 @@ class KegiatanController extends Controller
             ]));
 
         return redirect()->route('kegiatan.index')
-                         ->with('success', 'Task berhasil diperbarui!');
+                         ->with('success', 'Task updated successfully!');
     }
 
     public function destroy($id)
@@ -81,6 +81,6 @@ class KegiatanController extends Controller
         $kegiatan->delete();
 
         return redirect()->route('kegiatan.index')
-                         ->with('success', 'Task berhasil dihapus!');
+                         ->with('success', 'Task deleted successfully!');
     }
 }

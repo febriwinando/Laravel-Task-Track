@@ -29,7 +29,7 @@ class LoginController extends Controller
             return redirect()->intended('/pegawai');
         }
 
-        return back()->with('error', 'Email atau password salah!');
+        return back()->with('error', 'Incorrect email or password!');
     }
 
     public function logout(Request $request)

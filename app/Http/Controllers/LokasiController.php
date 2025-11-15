@@ -44,7 +44,7 @@ class LokasiController extends Controller
         Lokasi::create($validated);
 
         return redirect()->route('lokasi.index')
-            ->with('success', 'Lokasi berhasil ditambahkan!');
+            ->with('success', 'Location added successfully!');
     }
 
     /**
@@ -83,7 +83,7 @@ class LokasiController extends Controller
         $lokasi->update($validated);
 
         return redirect()->route('lokasi.index')
-            ->with('success', 'Lokasi berhasil diperbarui!');
+            ->with('success', 'Location updated successfully!');
     }
 
 

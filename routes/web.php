@@ -9,8 +9,7 @@ use App\Http\Controllers\LokasiController;
 use App\Http\Controllers\UserController;
 
 
-//User
-Route::resource('users', UserController::class);
+
 
 // Tampilkan form login
 
@@ -21,6 +20,8 @@ Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::middleware('auth')->group(function () {
+    //User
+    Route::resource('users', UserController::class);
      //Pegawai
     Route::resource('pegawai', PegawaiController::class)->middleware('role:administrator,staff');
 

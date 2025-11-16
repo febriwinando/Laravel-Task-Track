@@ -169,26 +169,35 @@
                     {{-- <a href="#" target="_blank"
                         class="btn btn-primary me-2"><span class="d-none d-md-block">Check Pro Version</span> <span class="d-block d-md-none">Pro</span></a>
                     <a href="#" target="_blank"
-                        class="btn btn-success"><span class="d-none d-md-block">Download Free </span> <span class="d-block d-md-none">Free</span></a> --}}
+                        class="btn btn-success"><span class="d-block d-md-none">Free</span></a> --}}
+                    <span class="btn btn-success d-none d-md-block">{{ Auth::user()->name  }}</span> 
                     <li class="nav-item dropdown">
                         <a class="nav-link nav-icon-hover" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        <img src="{{ asset('storage/assets/images/profile/user-1.jpg') }}" alt="" width="35" height="35" class="rounded-circle">
+                            <img class="fs-6 rounded-circle object-fit-cover" 
+                                src="{{ Auth::user()->foto 
+                                    ? asset('storage/' . Auth::user()->foto) 
+                                    : asset('storage/assets/icons/menu.svg') }}" 
+                                width="35" height="35"
+                                alt="Foto User" />
+
+                        {{-- <img src="{{ asset('storage/assets/images/profile/user-1.jpg') }}" alt="" width="35" height="35" class="rounded-circle"> --}}
                         </a>
                         <div class="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
                         <div class="message-body">
-                            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                            <a href="{{ route('users.edit', Auth::user()->id) }}" class="d-flex align-items-center gap-2 dropdown-item">
+                            {{-- <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item"> --}}
                             <i class="ti ti-user fs-6"></i>
-                            <p class="mb-0 fs-3">My Profile</p>
+                            <p class="mb-0 fs-3">Edit</p>
                             </a>
-                            <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
+                            {{-- <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                             <i class="ti ti-mail fs-6"></i>
                             <p class="mb-0 fs-3">My Account</p>
                             </a>
                             <a href="javascript:void(0)" class="d-flex align-items-center gap-2 dropdown-item">
                             <i class="ti ti-list-check fs-6"></i>
                             <p class="mb-0 fs-3">My Task</p>
-                            </a>
+                            </a> --}}
                             <a href="{{ route('logout') }}" 
                               class="btn btn-outline-primary mx-3 mt-2 d-block"
                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -198,7 +207,6 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
                             </form>
-                            {{-- <a href="/logout" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a> --}}
                         </div>
                         </div>
                     </li>

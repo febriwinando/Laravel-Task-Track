@@ -34,7 +34,7 @@
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
                 <ul id="sidebarnav">
-                    @if(in_array(Auth::user()->level, ['administrator', 'staff']))
+                    @if(in_array(Auth::user()->level, ['administrator']))
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
                         <span class="hide-menu">Admin</span>
@@ -42,7 +42,7 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/users/create" aria-expanded="false">
                             <span>
-                                <img src="{{ asset('storage/assets/icons/username.svg') }}" width="30" alt="" />
+                                <img class="fs-6" src="{{ asset('storage/assets/icons/username.svg') }}" width="30" alt="" />
                             </span>
                             <span class="hide-menu">Add User</span>
                         </a>
@@ -50,7 +50,7 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/users" aria-expanded="false">
                             <span>
-                                <img src="{{ asset('storage/assets/icons/username.svg') }}" width="30" alt="" />
+                                <img class="fs-6" src="{{ asset('storage/assets/icons/username.svg') }}" width="30" alt="" />
                             </span>
                             <span class="hide-menu">List Users</span>
                         </a>
@@ -64,7 +64,7 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/pegawai/create" aria-expanded="false">
                             <span>
-                                <img src="{{ asset('storage/assets/icons/addpeople.svg') }}" width="30" alt="" />
+                                <img class="fs-6" src="{{ asset('storage/assets/icons/addpeople.svg') }}" width="30" alt="" />
                             </span>
                             <span class="hide-menu">Add Employee</span>
                         </a>
@@ -72,7 +72,7 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/pegawai" aria-expanded="false">
                             <span>
-                                <img src="{{ asset('storage/assets/icons/peoples.svg') }}" width="30" alt="" />
+                                <img class="fs-6" src="{{ asset('storage/assets/icons/peoples.svg') }}" width="30" alt="" />
                             </span>
                             <span class="hide-menu">List Employees</span>
                         </a>
@@ -85,7 +85,7 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/lokasi/create" aria-expanded="false">
                             <span>
-                                <img src="{{ asset('storage/assets/icons/addlocation.svg') }}" width="30" alt="" />
+                                <img class="fs-6" src="{{ asset('storage/assets/icons/addlocation.svg') }}" width="30" alt="" />
                             </span>
                             <span class="hide-menu">Add Locations</span>
                         </a>
@@ -93,7 +93,7 @@
                     <li class="sidebar-item">
                         <a class="sidebar-link" href="/lokasi" aria-expanded="false">
                             <span>
-                                <img src="{{ asset('storage/assets/icons/location.svg') }}" width="30" alt="" />
+                                <img class="fs-6" src="{{ asset('storage/assets/icons/location.svg') }}" width="30" alt="" />
                             </span>
                             <span class="hide-menu">List Locations</span>
                         </a>
@@ -105,7 +105,7 @@
                     <li class="sidebar-item">
                     <a class="sidebar-link" href="/kegiatan/create" aria-expanded="false">
                         <span>
-                                <img src="{{ asset('storage/assets/icons/addelement.svg') }}" width="30" alt="" />
+                                <img class="fs-6" src="{{ asset('storage/assets/icons/addelement.svg') }}" width="30" alt="" />
                         </span>
                         <span class="hide-menu">Add Task</span>
                     </a>
@@ -113,7 +113,7 @@
                     <li class="sidebar-item">
                     <a class="sidebar-link" href="/kegiatan" aria-expanded="false">
                         <span>
-                                <img src="{{ asset('storage/assets/icons/element.svg') }}" width="30" alt="" />
+                                <img class="fs-6" src="{{ asset('storage/assets/icons/element.svg') }}" width="30" alt="" />
                         </span>
                         <span class="hide-menu">List Tasks</span>
                     </a>
@@ -125,7 +125,7 @@
                     <li class="sidebar-item">
                     <a class="sidebar-link" href="/jadwal" aria-expanded="false">
                         <span>
-                                <img src="{{ asset('storage/assets/icons/editcalendar.svg') }}" width="30" alt="" />
+                                <img class="fs-6" src="{{ asset('storage/assets/icons/editcalendar.svg') }}" width="30" alt="" />
                         </span>
                         <span class="hide-menu">Manage Schedules</span>
                     </a>
@@ -134,7 +134,7 @@
                     {{-- <li class="sidebar-item">
                     <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
                         <span>
-                                <img src="{{ asset('storage/assets/icons/calendar.svg') }}" width="30" alt="" />
+                                <img class="fs-6" src="{{ asset('storage/assets/icons/calendar.svg') }}" width="30" alt="" />
                         </span>
                         <span class="hide-menu">List Schedules</span>
                     </a>
@@ -154,7 +154,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item d-block d-xl-none">
                     <a class="nav-link sidebartoggler nav-icon-hover" id="headerCollapse" href="javascript:void(0)">
-                        <img src="{{ asset('storage/assets/icons/menu.svg') }}" width="30" alt="" />
+                        <img class="fs-6" src="{{ asset('storage/assets/icons/menu.svg') }}" width="30" alt="" />
                     </a>
                     </li>
                     <li class="nav-item">
@@ -189,7 +189,16 @@
                             <i class="ti ti-list-check fs-6"></i>
                             <p class="mb-0 fs-3">My Task</p>
                             </a>
-                            <a href="./authentication-login.html" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                            <a href="{{ route('logout') }}" 
+                              class="btn btn-outline-primary mx-3 mt-2 d-block"
+                              onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                              Logout
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                            {{-- <a href="/logout" class="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a> --}}
                         </div>
                         </div>
                     </li>

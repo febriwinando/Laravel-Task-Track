@@ -25,19 +25,19 @@ Route::middleware('auth')->group(function () {
     Route::resource('pegawai', PegawaiController::class)->middleware('role:administrator,staff');
 
     //Lokasi
-    Route::resource('lokasi', LokasiController::class);
+    Route::resource('lokasi', LokasiController::class)->middleware('role:administrator,staff');
 
     //Kegiatan
-    Route::resource('kegiatan', KegiatanController::class);
+    Route::resource('kegiatan', KegiatanController::class)->middleware('role:administrator,staff');
 
     // Jadwal
-    Route::get('/jadwal/modal-data/{tanggal}/{pegawai_id}', [JadwalController::class, 'modalData']);
-    Route::post('/jadwal/save', [JadwalController::class, 'save']);
-    Route::delete('/jadwal/delete/{id}', [JadwalController::class, 'delete']);
-    Route::get('/jadwal/events/{pegawai_id}', [JadwalController::class, 'getEvents']);
-    Route::resource('jadwal', JadwalController::class);
+    Route::get('/jadwal/modal-data/{tanggal}/{pegawai_id}', [JadwalController::class, 'modalData'])->middleware('role:administrator,staff');
+    Route::post('/jadwal/save', [JadwalController::class, 'save'])->middleware('role:administrator,staff');
+    Route::delete('/jadwal/delete/{id}', [JadwalController::class, 'delete'])->middleware('role:administrator,staff');
+    Route::get('/jadwal/events/{pegawai_id}', [JadwalController::class, 'getEvents'])->middleware('role:administrator,staff');
+    Route::resource('jadwal', JadwalController::class)->middleware('role:administrator,staff');
 
-    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout')->middleware('role:administrator,staff');
 });
 
 

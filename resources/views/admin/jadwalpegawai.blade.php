@@ -63,18 +63,19 @@
 
                                 <hr>
 
-                                <h5 class="mt-3 fw-bold">Scheduled List</h5>
-                                <table class="table table-bordered" id="schedule-table">
-                                    <thead>
-                                        <tr>
-                                            <th>Tasks</th>
-                                            <th>Locations</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
-
+                                <div class="col-md-12">
+                                    <h5 class="mt-3 fw-bold">Scheduled List</h5>
+                                    <table class="table table-bordered table-striped table-hover table-sm" id="schedule-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Tasks</th>
+                                                <th>Locations</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
+                                </div>
                             </div>
 
                         </div>
@@ -95,6 +96,22 @@
 @section('scripts')
 
 <script>
+    function reloadPegawaiSelect(dataPegawai) {
+
+        // Reset selectpicker
+        $('#pegawai-select').selectpicker('destroy').empty();
+
+        // Masukkan option baru
+        dataPegawai.forEach(p => {
+            $('#pegawai-select').append(`
+                <option value="${p.id}" data-name="${p.name}">${p.name}</option>
+            `);
+        });
+
+        // Re-init plugin
+        $('#pegawai-select').selectpicker();
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
 
         let calendarEl = document.getElementById('calendar');
@@ -168,23 +185,26 @@
 
             $.get(`/jadwal/modal-data/${tanggal}/${pegawai_id}`, function (res) {
 
-                // Load Select Kegiatan
-                $('#select-kegiatan').empty();
+                // Reset selectpicker supaya tidak duplikasi
+                $('#select-kegiatan').selectpicker('destroy').empty();
+                $('#select-lokasi').selectpicker('destroy').empty();
+
+                // Load ulang kegiatan
                 res.kegiatan.forEach(k => {
-                    $('#select-kegiatan').append(
-                        `<option value="${k.id}">${k.task}</option>`
-                    );
+                    $('#select-kegiatan').append(`<option value="${k.id}">${k.task}</option>`);
                 });
 
-                // Load Select Lokasi
-                $('#select-lokasi').empty();
+                // Load ulang lokasi
                 res.lokasi.forEach(l => {
-                    $('#select-lokasi').append(
-                        `<option value="${l.id}">${l.building} / ${l.floor}</option>`
-                    );
+                    $('#select-lokasi').append(`<option value="${l.id}">${l.building} / ${l.floor}</option>`);
                 });
 
-                $('.selectpicker').selectpicker('refresh');
+                // Re-init selectpicker
+                $('#select-kegiatan').selectpicker();
+                $('#select-lokasi').selectpicker();
+
+
+                // $('.selectpicker').selectpicker('refresh');
 
                 // Load Tabel Schedule
                 loadScheduleTable(res.schedules);

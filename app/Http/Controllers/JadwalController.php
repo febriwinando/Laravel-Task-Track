@@ -105,7 +105,7 @@ class JadwalController extends Controller
             ->get()
             ->map(function ($item) {
                 return [
-                    'title' => 'Ada Kegiatan',
+                    'title' => 'Tasks Available',
                     'start' => $item->tanggal,
                     'color' => '#ffc107', // warna kuning
                 ];

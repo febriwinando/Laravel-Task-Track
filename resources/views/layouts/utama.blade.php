@@ -34,7 +34,7 @@
             <!-- Sidebar navigation-->
             <nav class="sidebar-nav scroll-sidebar" data-simplebar="">
                 <ul id="sidebarnav">
-                    {{-- @if(in_array(Auth::user()->level, ['administrator', 'staff'])) --}}
+                    @if(in_array(Auth::user()->level, ['administrator', 'staff']))
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
                         <span class="hide-menu">Admin</span>
@@ -55,8 +55,8 @@
                             <span class="hide-menu">List Users</span>
                         </a>
                     </li>
-                    {{-- @endif
-                    @if(in_array(Auth::user()->level, ['administrator', 'staff'])) --}}
+                    @endif
+                    @if(in_array(Auth::user()->level, ['administrator', 'staff']))
                     <li class="nav-small-cap">
                         <i class="ti ti-dots nav-small-cap-icon fs-6"></i>
                         <span class="hide-menu">Employees</span>
@@ -130,7 +130,7 @@
                         <span class="hide-menu">Manage Schedules</span>
                     </a>
                     </li>
-                    {{-- @endif --}}
+                    @endif
                     {{-- <li class="sidebar-item">
                     <a class="sidebar-link" href="./sample-page.html" aria-expanded="false">
                         <span>

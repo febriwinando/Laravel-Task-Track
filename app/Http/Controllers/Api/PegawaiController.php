@@ -5,12 +5,33 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Pegawai;
+use App\Models\Schedule;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Storage;
 
 class PegawaiController extends Controller
 {
+
+    public function byPegawai($pegawai_id)
+    {
+        $data = Schedule::with([
+            'pegawai',
+            'kegiatan',
+            'lokasi',
+            'creator',
+            'updater'
+        ])
+        ->where('pegawai_id', $pegawai_id)
+        ->orderBy('tanggal', 'ASC')
+        ->get();
+
+        return response()->json([
+            'status' => true,
+            'data' => $data
+        ]);
+    }
+
     public function register(Request $request)
     {
         $validated = $request->validate([

@@ -19,9 +19,12 @@ Route::get('/', [LoginController::class, 'showLogin'])->name('login');
 Route::get('/login', [LoginController::class, 'showLogin'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
+Route::get('/resetpassword', [LoginController::class, 'reset']);
+
+
 Route::middleware('auth')->group(function () {
     //User
-    Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class)->middleware('role:administrator,staff');
      //Pegawai
     Route::resource('pegawai', PegawaiController::class)->middleware('role:administrator,staff');
 

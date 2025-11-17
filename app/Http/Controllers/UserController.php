@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Mail\ResetPasswordMail;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -107,6 +109,10 @@ class UserController extends Controller
         }
 
         $user->update($data);
+        
+        if($user->level == "staff"){
+            return redirect()->route('pegawai.index')->with('success', 'Your data has been successfully updated.');
+        }
 
         return redirect()->route('users.index')->with('success', 'User successfully updated.');
     }
@@ -119,4 +125,17 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
+
+
+    public function kirimEmail()
+    {
+        $data = [
+            'pesan' => 'Halo! Ini adalah email dari Laravel.'
+        ];
+
+        Mail::to('nandokotank@gmail.com')->send(new ResetPasswordMail($data));
+
+        return "Email sudah dikirim!";
+    }
+
 }

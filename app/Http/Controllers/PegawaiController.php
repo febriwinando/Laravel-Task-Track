@@ -45,6 +45,8 @@ class PegawaiController extends Controller
 
         ]);
 
+        $validated['password'] = Hash::make($validated['password']);
+
         $validated['created_by']=auth()->id();
         $validated['created_ip']=$request->ip();
 
@@ -103,6 +105,7 @@ class PegawaiController extends Controller
 
         if ($request->filled('password')) {
             $validated['password'] = Hash::make($validated['password']);
+            
         } else {
             unset($validated['password']);
         }

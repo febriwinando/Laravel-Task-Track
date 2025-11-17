@@ -40,4 +40,10 @@ class LoginController extends Controller
 
         return redirect('/login');
     }
+
+
+        public function reset()
+    {
+        return view('mail.reset');
+    }
 }

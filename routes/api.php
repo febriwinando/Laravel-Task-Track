@@ -25,6 +25,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/pegawai/{pegawai}', [PegawaiController::class, 'destroy']);
 
 
+    Route::post('/schedule/update-verifikasi', [PegawaiController::class, 'updateVerifikasiPegawai']);
 
 
 });

@@ -13,18 +13,71 @@ use Illuminate\Support\Facades\Storage;
 class PegawaiController extends Controller
 {
 
+    public function updateVerifikasiPegawai(Request $request)
+    {
+        $request->validate([
+            'id'         => 'required|integer',
+            'pegawai_id' => 'required|integer',
+            'tanggal'    => 'required|date',
+            'verifikasi_pegawai' => 'required|in:ya,tidak',
+        ]);
+
+        $schedule = Schedule::where('id', $request->id)
+                    ->where('pegawai_id', $request->pegawai_id)
+                    ->where('tanggal', $request->tanggal)
+                    ->first();
+
+        if (!$schedule) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Data schedule tidak ditemukan.'
+            ], 404);
+        }
+
+        // Update hanya satu field
+        $schedule->verifikasi_pegawai = $request->verifikasi;
+        $schedule->save();
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Verifikasi pegawai berhasil diperbarui.',
+            'data' => $schedule
+        ]);
+    }
+
+
+    // public function byPegawai($pegawai_id)
+    // {
+    //     $data = Schedule::with([
+    //         'pegawai',
+    //         'kegiatan',
+    //         'lokasi',
+    //         'creator',
+    //         'updater'
+    //     ])
+    //     ->where('pegawai_id', $pegawai_id)
+    //     ->orderBy('tanggal', 'ASC')
+    //     ->get();
+
+    //     return response()->json([
+    //         'status' => true,
+    //         'data' => $data
+    //     ]);
+    // }
+
     public function byPegawai($pegawai_id)
     {
         $data = Schedule::with([
-            'pegawai',
-            'kegiatan',
-            'lokasi',
-            'creator',
-            'updater'
-        ])
-        ->where('pegawai_id', $pegawai_id)
-        ->orderBy('tanggal', 'ASC')
-        ->get();
+                'pegawai',
+                'kegiatan',
+                'lokasi',
+                'creator',
+                'updater',
+                'verifikator'   // <-- tambahkan
+            ])
+            ->where('pegawai_id', $pegawai_id)
+            ->orderBy('tanggal', 'ASC')
+            ->get();
 
         return response()->json([
             'status' => true,
@@ -32,12 +85,43 @@ class PegawaiController extends Controller
         ]);
     }
 
+
+    // public function byPegawaiMonth(Request $request, $pegawai_id)
+    // {
+    //     $bulan = $request->bulan;
+    //     $tahun = $request->tahun;
+
+    //     // Validasi sederhana
+    //     if (!$bulan || !$tahun) {
+    //         return response()->json([
+    //             "status" => false,
+    //             "message" => "Parameter bulan dan tahun wajib diisi"
+    //         ], 400);
+    //     }
+
+    //     $data = Schedule::with([
+    //             'pegawai',
+    //             'kegiatan',
+    //             'lokasi',
+    //             'creator',
+    //             'updater'
+    //         ])
+    //         ->where('pegawai_id', $pegawai_id)
+    //         ->whereMonth('tanggal', $bulan)
+    //         ->whereYear('tanggal', $tahun)
+    //         ->orderBy('tanggal', 'ASC')
+    //         ->get();
+
+    //     return response()->json([
+    //         'status' => true,
+    //         'data' => $data
+    //     ]);
+    // }
     public function byPegawaiMonth(Request $request, $pegawai_id)
     {
         $bulan = $request->bulan;
         $tahun = $request->tahun;
 
-        // Validasi sederhana
         if (!$bulan || !$tahun) {
             return response()->json([
                 "status" => false,
@@ -50,7 +134,8 @@ class PegawaiController extends Controller
                 'kegiatan',
                 'lokasi',
                 'creator',
-                'updater'
+                'updater',
+                'verifikator'   // <-- tambahkan
             ])
             ->where('pegawai_id', $pegawai_id)
             ->whereMonth('tanggal', $bulan)
@@ -63,6 +148,7 @@ class PegawaiController extends Controller
             'data' => $data
         ]);
     }
+
 
 
     public function register(Request $request)

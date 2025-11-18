@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class Schedule extends Model
 {
     use HasFactory;
@@ -14,9 +15,12 @@ class Schedule extends Model
         'kegiatan_id',
         'lokasi_id',
         'keterangan',
-        'created_by', 'created_ip',
-        'updated_by', 'updated_ip',
-
+        'created_by', 
+        'created_ip',
+        'updated_by', 
+        'updated_ip',
+        'verifikasi_pegawai',
+        'verifikator_id'
     ];
 
     public function pegawai()
@@ -43,4 +47,11 @@ class Schedule extends Model
     {
         return $this->belongsTo(User::class, 'updated_by');
     }
+
+    public function verifikator()
+    {
+        return $this->belongsTo(Pegawai::class, 'verifikator_id');
+    }
+
+
 }

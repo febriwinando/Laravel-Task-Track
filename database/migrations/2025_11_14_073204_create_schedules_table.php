@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('created_ip')->nullable();
             $table->foreignId('updated_by')->nullable()->constrained('users')->nullOnDelete();  
             $table->string('updated_ip')->nullable();
+            $table->enum('verifikasi_pegawai', ['ya', 'tidak'])->nullable();
+            $table->foreignId('verifikator_id')->nullable()->constrained('pegawais')->nullOnDelete();
+            $table->enum('verifikasi_verifikator', ['ya', 'tidak'])->nullable();
             $table->timestamps();
         });
     }

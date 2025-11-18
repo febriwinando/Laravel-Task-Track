@@ -9,10 +9,11 @@ use App\Http\Controllers\JadwalController;
 
 Route::post('/register', [PegawaiController::class, 'register']);
 Route::post('/login', [PegawaiController::class, 'login']);
-
-Route::get('/schedule/pegawai/{id}', [PegawaiController::class, 'byPegawai']);
+    Route::get('/schedule/pegawai/{id}', [PegawaiController::class, 'byPegawai']);
+    Route::get('/schedule/pegawai/{id}/bulan', [PegawaiController::class, 'byPegawaiMonth']);
 
 Route::middleware('auth:sanctum')->group(function () {
+
     Route::post('/logout', [PegawaiController::class, 'logout']);
     Route::get('/me', [PegawaiController::class, 'me']);
 
@@ -22,6 +23,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/pegawai', [PegawaiController::class, 'store']);
     Route::put('/pegawai/{pegawai}', [PegawaiController::class, 'update']);
     Route::delete('/pegawai/{pegawai}', [PegawaiController::class, 'destroy']);
+
 
 
 

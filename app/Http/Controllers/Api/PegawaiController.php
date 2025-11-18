@@ -32,6 +32,39 @@ class PegawaiController extends Controller
         ]);
     }
 
+    public function byPegawaiMonth(Request $request, $pegawai_id)
+    {
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+
+        // Validasi sederhana
+        if (!$bulan || !$tahun) {
+            return response()->json([
+                "status" => false,
+                "message" => "Parameter bulan dan tahun wajib diisi"
+            ], 400);
+        }
+
+        $data = Schedule::with([
+                'pegawai',
+                'kegiatan',
+                'lokasi',
+                'creator',
+                'updater'
+            ])
+            ->where('pegawai_id', $pegawai_id)
+            ->whereMonth('tanggal', $bulan)
+            ->whereYear('tanggal', $tahun)
+            ->orderBy('tanggal', 'ASC')
+            ->get();
+
+        return response()->json([
+            'status' => true,
+            'data' => $data
+        ]);
+    }
+
+
     public function register(Request $request)
     {
         $validated = $request->validate([

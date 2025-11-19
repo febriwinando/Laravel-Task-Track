@@ -7,10 +7,12 @@ use App\Http\Controllers\Api\PegawaiController;
 use App\Http\Controllers\JadwalController;
 
 
-Route::post('/register', [PegawaiController::class, 'register']);
-Route::post('/login', [PegawaiController::class, 'login']);
+    Route::post('/register', [PegawaiController::class, 'register']);
+    Route::post('/login', [PegawaiController::class, 'login']);
     Route::get('/schedule/pegawai/{id}', [PegawaiController::class, 'byPegawai']);
     Route::get('/schedule/pegawai/{id}/bulan', [PegawaiController::class, 'byPegawaiMonth']);
+    Route::post('/schedule/update-verifikasi', [PegawaiController::class, 'updateVerifikasiPegawai']);
+
 
 Route::middleware('auth:sanctum')->group(function () {
 
@@ -25,7 +27,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/pegawai/{pegawai}', [PegawaiController::class, 'destroy']);
 
 
-    Route::post('/schedule/update-verifikasi', [PegawaiController::class, 'updateVerifikasiPegawai']);
 
 
 });

@@ -34,9 +34,16 @@ class PegawaiController extends Controller
             ], 404);
         }
 
+        if($request->verifikasi_pegawai == "tidak"){
         // Update hanya satu field
-        $schedule->verifikasi_pegawai = $request->verifikasi;
-        $schedule->save();
+            $schedule->verifikasi_pegawai = NULL;
+            $schedule->save();
+        }else{
+                    // Update hanya satu field
+            $schedule->verifikasi_pegawai = $request->verifikasi_pegawai;
+            $schedule->save();
+        }
+
 
         return response()->json([
             'status' => true,

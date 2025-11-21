@@ -156,6 +156,38 @@ class PegawaiController extends Controller
         ]);
     }
 
+    public function daftar_schedule(Request $request, $id){
+        
+        $tanggal = $request->tanggal;
+
+        if (!$tanggal) {
+            return response()->json([
+                "status" => false,
+                "message" => "Parameter tanggal wajib diisi"
+            ], 400);
+        }
+
+        $data = Schedule::with([
+            'pegawai',
+            'kegiatan',
+            'lokasi',
+            'creator',
+            'updater',
+            'verifikator'
+        ])
+            ->where('pegawai_id', '!=', $id) 
+            ->where('tanggal', $tanggal)
+            ->orderBy('pegawai_id', 'ASC')
+            ->get();
+
+
+        return response()->json([
+            'status' => true,
+            'data' => $data
+        ]);
+
+    }
+
 
 
     public function register(Request $request)
